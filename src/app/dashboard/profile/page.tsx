@@ -1,0 +1,76 @@
+import { getCurrentUser } from '@/lib/auth';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
+
+export const metadata = {
+  title: 'Profile | Dashboard',
+  description: 'Manage your profile',
+};
+
+export default async function ProfilePage() {
+  const user = await getCurrentUser(false);
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+          Profile
+        </h1>
+        <p className="text-gray-500 dark:text-gray-400 mt-1">
+          Manage your account information
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <Card className="lg:col-span-1">
+          <CardContent className="pt-6 text-center">
+            <div className="w-24 h-24 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span className="text-3xl text-white font-bold">
+                {user?.username?.charAt(0).toUpperCase() || 'U'}
+              </span>
+            </div>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+              {user?.username || 'User'}
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400 mt-1">Member</p>
+          </CardContent>
+        </Card>
+
+        <Card className="lg:col-span-2">
+          <CardHeader>
+            <CardTitle>Account Information</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <dl className="space-y-4">
+              <div className="flex flex-col sm:flex-row sm:justify-between py-3 border-b border-gray-100 dark:border-gray-700">
+                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                  Username
+                </dt>
+                <dd className="text-sm text-gray-900 dark:text-white mt-1 sm:mt-0">
+                  {user?.username || 'N/A'}
+                </dd>
+              </div>
+              <div className="flex flex-col sm:flex-row sm:justify-between py-3 border-b border-gray-100 dark:border-gray-700">
+                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                  Account Type
+                </dt>
+                <dd className="text-sm text-gray-900 dark:text-white mt-1 sm:mt-0">
+                  Standard User
+                </dd>
+              </div>
+              <div className="flex flex-col sm:flex-row sm:justify-between py-3 border-b border-gray-100 dark:border-gray-700">
+                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                  Status
+                </dt>
+                <dd className="mt-1 sm:mt-0">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400">
+                    Active
+                  </span>
+                </dd>
+              </div>
+            </dl>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}
