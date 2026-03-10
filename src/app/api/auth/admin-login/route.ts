@@ -22,8 +22,18 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({ username, password }),
     });
 
-    if (error) {
-      return NextResponse.json({ error }, { status: status || 401 });
+    if (error || status === 0 || status >= 400) {
+      return NextResponse.json(
+        { error: error || 'Invalid admin credentials' },
+        { status: status && status >= 400 ? status : 401 }
+      );
+    }
+
+    if (!data) {
+      return NextResponse.json(
+        { error: 'Invalid response from server' },
+        { status: 401 }
+      );
     }
 
     await setAuthCookie(basicAuthToken, true);

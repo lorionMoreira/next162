@@ -2,6 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { apiRequest, createBasicAuthToken, ENDPOINTS } from '@/lib/api';
 import { setAuthCookie } from '@/lib/auth';
 
+interface LoginResponse {
+  success?: boolean;
+  message?: string;
+  [key: string]: unknown;
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -16,14 +22,24 @@ export async function POST(request: NextRequest) {
 
     const basicAuthToken = createBasicAuthToken(username, password);
 
-    const { data, error, status } = await apiRequest(ENDPOINTS.LOGIN, {
+    const { data, error, status } = await apiRequest<LoginResponse>(ENDPOINTS.LOGIN, {
       method: 'POST',
       basicAuth: basicAuthToken,
       body: JSON.stringify({ username, password }),
     });
 
-    if (error) {
-      return NextResponse.json({ error }, { status: status || 401 });
+    if (!data) {
+      return NextResponse.json(
+        { error: error || 'Invalid response from server' },
+        { status: 401 }
+      );
+    }
+
+    if (data.success === false) {
+      return NextResponse.json(
+        { error: error || data.message || 'Invalid credentials' },
+        { status: 401 }
+      );
     }
 
     await setAuthCookie(basicAuthToken, false);

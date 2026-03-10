@@ -5,10 +5,8 @@ const AUTH_COOKIE_NAME = 'auth-token';
 const ADMIN_AUTH_COOKIE_NAME = 'admin-auth-token';
 
 const publicRoutes = ['/', '/login', '/register', '/admin/login'];
-const clientProtectedRoutes = ['/dashboard'];
-const adminProtectedRoutes = ['/admin/dashboard'];
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const isPublicRoute = publicRoutes.some(
@@ -19,13 +17,8 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const isClientProtectedRoute = clientProtectedRoutes.some((route) =>
-    pathname.startsWith(route)
-  );
-
-  const isAdminProtectedRoute = adminProtectedRoutes.some((route) =>
-    pathname.startsWith(route)
-  );
+  const isClientProtectedRoute = pathname.startsWith('/dashboard');
+  const isAdminProtectedRoute = pathname.startsWith('/admin/dashboard');
 
   if (isClientProtectedRoute) {
     const authToken = request.cookies.get(AUTH_COOKIE_NAME);
