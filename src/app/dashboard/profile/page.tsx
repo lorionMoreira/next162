@@ -23,7 +23,7 @@ export default async function ProfilePage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <Card className="lg:col-span-1">
           <CardContent className="pt-6 text-center">
-            <div className="w-24 h-24 bg-[#3B5998] rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-24 h-24 bg-theme-primary rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-3xl text-white font-bold">
                 {user?.username?.charAt(0).toUpperCase() || 'U'}
               </span>
@@ -62,7 +62,7 @@ export default async function ProfilePage() {
                   Status
                 </dt>
                 <dd className="mt-1 sm:mt-0">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-theme-success/20 text-theme-success">
                     Ativo
                   </span>
                 </dd>

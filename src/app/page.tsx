@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1E3A5F] via-[#2D4A6F] to-[#1E3A5F]">
+    <div className="min-h-screen bg-gradient-theme">
       {/* Header */}
       <header className="bg-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -21,7 +21,7 @@ export default function HomePage() {
               </Link>
               <Link 
                 href="/register"
-                className="bg-white text-[#3B5998] hover:bg-gray-100 px-6 py-2 rounded-lg font-medium transition-colors"
+                className="bg-white text-theme-primary hover:bg-gray-100 px-6 py-2 rounded-lg font-medium transition-colors"
               >
                 Cadastrar
               </Link>
@@ -36,16 +36,16 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto text-center">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
               Sistema de Gerenciamento de
-              <span className="block text-blue-300">Equipamentos da Defensoria</span>
+              <span className="block text-white/80">Equipamentos da Defensoria</span>
             </h1>
-            <p className="text-xl text-blue-200 max-w-3xl mx-auto mb-10">
+            <p className="text-xl text-white/70 max-w-3xl mx-auto mb-10">
               Acesse nossos serviços de forma segura. Cadastre-se ou faça login para gerenciar 
               equipamentos e acompanhar seus registros.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link 
                 href="/register"
-                className="bg-white text-[#3B5998] hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+                className="bg-white text-theme-primary hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
               >
                 Criar Conta
               </Link>
@@ -100,13 +100,13 @@ export default function HomePage() {
                   key={service.title}
                   className="p-6 rounded-xl bg-white/10 backdrop-blur-sm hover:bg-white/15 transition-colors border border-white/10"
                 >
-                  <div className="w-14 h-14 bg-[#3B5998] rounded-lg flex items-center justify-center text-white mb-4">
+                  <div className="w-14 h-14 bg-white/20 rounded-lg flex items-center justify-center text-white mb-4">
                     {service.icon}
                   </div>
                   <h3 className="text-xl font-semibold text-white mb-2">
                     {service.title}
                   </h3>
-                  <p className="text-blue-200">
+                  <p className="text-white/70">
                     {service.description}
                   </p>
                 </div>
@@ -121,12 +121,12 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold text-white mb-6">
               Pronto para começar?
             </h2>
-            <p className="text-lg text-blue-200 mb-8">
+            <p className="text-lg text-white/70 mb-8">
               Junte-se aos usuários que utilizam nossa plataforma para gerenciar equipamentos de forma eficiente.
             </p>
             <Link 
               href="/register"
-              className="inline-block bg-white text-[#3B5998] hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+              className="inline-block bg-white text-theme-primary hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
             >
               Cadastrar Agora
             </Link>
@@ -135,18 +135,18 @@ export default function HomePage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#0D1B2A] text-white py-12">
+      <footer className="bg-black/30 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <h3 className="text-lg font-semibold mb-4">SGE-DPE</h3>
-              <p className="text-gray-400">
+              <p className="text-white/60">
                 Sistema de Gerenciamento de Equipamentos da Defensoria Pública.
               </p>
             </div>
             <div>
               <h3 className="text-lg font-semibold mb-4">Links Rápidos</h3>
-              <ul className="space-y-2 text-gray-400">
+              <ul className="space-y-2 text-white/60">
                 <li>
                   <Link href="/login" className="hover:text-white transition-colors">
                     Entrar
@@ -161,13 +161,13 @@ export default function HomePage() {
             </div>
             <div>
               <h3 className="text-lg font-semibold mb-4">Contato</h3>
-              <p className="text-gray-400">
+              <p className="text-white/60">
                 Salvador, Bahia<br />
                 Brasil
               </p>
             </div>
           </div>
-          <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+          <div className="mt-8 pt-8 border-t border-white/10 text-center text-white/60">
             <p>© {new Date().getFullYear()} Defensoria Pública. Todos os direitos reservados.</p>
           </div>
         </div>

@@ -5,10 +5,10 @@ export default async function DashboardPage() {
   const user = await getCurrentUser();
 
   const stats = [
-    { label: 'Equipamentos Ativos', value: '156', color: 'bg-[#3B5998]' },
-    { label: 'Em Manutenção', value: '12', color: 'bg-yellow-500' },
-    { label: 'Disponíveis', value: '89', color: 'bg-green-500' },
-    { label: 'Total Cadastrado', value: '257', color: 'bg-purple-500' },
+    { label: 'Equipamentos Ativos', value: '156', color: 'bg-theme-primary' },
+    { label: 'Em Manutenção', value: '12', color: 'bg-theme-warning' },
+    { label: 'Disponíveis', value: '89', color: 'bg-theme-success' },
+    { label: 'Total Cadastrado', value: '257', color: 'bg-theme-secondary' },
   ];
 
   return (
@@ -81,7 +81,7 @@ export default async function DashboardPage() {
               ].map((action) => (
                 <button
                   key={action.label}
-                  className="flex flex-col items-center justify-center p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  className="flex flex-col items-center justify-center p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-theme-primary/5 hover:border-theme-primary/30 transition-colors"
                 >
                   <span className="text-2xl mb-2">{action.icon}</span>
                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300">

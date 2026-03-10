@@ -1,46 +1,98 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ==========================================
+     CORES DO TEMA - Inspirado Nubank
+     Altere estas variáveis para mudar o tema
+     ========================================== */
   
-  /* Primary Colors - Blue Theme */
-  --color-primary: #3B5998;
-  --color-primary-light: #4A6DB5;
-  --color-primary-dark: #2D4373;
+  /* Primary - Roxo/Violeta (cor principal) */
+  --color-primary: #820AD1;
+  --color-primary-light: #A020F0;
+  --color-primary-dark: #5A0B91;
   
-  /* Secondary Colors */
-  --color-secondary: #5C7DC2;
-  --color-secondary-light: #7A9AD8;
-  --color-secondary-dark: #3D5A8A;
+  /* Secondary - Roxo mais claro */
+  --color-secondary: #9B4DCA;
+  --color-secondary-light: #BA68C8;
+  --color-secondary-dark: #7B1FA2;
   
-  /* Background Colors */
-  --color-bg-primary: #1E3A5F;
-  --color-bg-secondary: #E8ECF0;
+  /* Accent - Magenta/Pink */
+  --color-accent: #E91E63;
+  --color-accent-light: #F48FB1;
+  --color-accent-dark: #C2185B;
+  
+  /* Background */
+  --color-bg-primary: #F4F4F4;
+  --color-bg-secondary: #FFFFFF;
+  --color-bg-dark: #1A1A1A;
   --color-bg-card: #FFFFFF;
-  --color-bg-dark: #0D1B2A;
   
-  /* Text Colors */
+  /* Text */
   --color-text-primary: #1A1A1A;
   --color-text-secondary: #666666;
   --color-text-light: #FFFFFF;
   --color-text-muted: #888888;
   
-  /* Accent Colors */
+  /* Status Colors */
   --color-success: #00C853;
   --color-error: #FF5252;
   --color-warning: #FFB300;
   --color-info: #2196F3;
+  
+  /* Border */
+  --color-border-light: #E0E0E0;
+  --color-border-medium: #CCCCCC;
+  
+  /* ==========================================
+     Variáveis do sistema
+     ========================================== */
+  --background: var(--color-bg-primary);
+  --foreground: var(--color-text-primary);
 }
 
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--color-bg-dark);
+    --foreground: var(--color-text-light);
+  }
+}
+
+/* ==========================================
+   Tailwind Theme - Registra as variáveis CSS
+   ========================================== */
 @theme inline {
+  /* Colors */
+  --color-primary: var(--color-primary);
+  --color-primary-light: var(--color-primary-light);
+  --color-primary-dark: var(--color-primary-dark);
+  
+  --color-secondary: var(--color-secondary);
+  --color-secondary-light: var(--color-secondary-light);
+  --color-secondary-dark: var(--color-secondary-dark);
+  
+  --color-accent: var(--color-accent);
+  --color-accent-light: var(--color-accent-light);
+  --color-accent-dark: var(--color-accent-dark);
+  
+  --color-success: var(--color-success);
+  --color-error: var(--color-error);
+  --color-warning: var(--color-warning);
+  --color-info: var(--color-info);
+  
+  /* Background */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  
+  /* Fonts */
   --font-sans: 'Inter', var(--font-geist-sans), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
 }
 
+/* ==========================================
+   Base Styles
+   ========================================== */
 body {
   background: var(--background);
   color: var(--foreground);
@@ -64,3 +116,75 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-primary-dark);
 }
+
+/* ==========================================
+   Utility Classes usando variáveis CSS
+   Use: bg-theme-primary, text-theme-primary, etc.
+   ========================================== */
+
+/* Background utilities */
+.bg-theme-primary { background-color: var(--color-primary); }
+.bg-theme-primary-light { background-color: var(--color-primary-light); }
+.bg-theme-primary-dark { background-color: var(--color-primary-dark); }
+.bg-theme-secondary { background-color: var(--color-secondary); }
+.bg-theme-secondary-light { background-color: var(--color-secondary-light); }
+.bg-theme-secondary-dark { background-color: var(--color-secondary-dark); }
+.bg-theme-accent { background-color: var(--color-accent); }
+.bg-theme-accent-light { background-color: var(--color-accent-light); }
+.bg-theme-accent-dark { background-color: var(--color-accent-dark); }
+.bg-theme-success { background-color: var(--color-success); }
+.bg-theme-error { background-color: var(--color-error); }
+.bg-theme-warning { background-color: var(--color-warning); }
+.bg-theme-info { background-color: var(--color-info); }
+
+/* Text utilities */
+.text-theme-primary { color: var(--color-primary); }
+.text-theme-primary-light { color: var(--color-primary-light); }
+.text-theme-primary-dark { color: var(--color-primary-dark); }
+.text-theme-secondary { color: var(--color-secondary); }
+.text-theme-secondary-light { color: var(--color-secondary-light); }
+.text-theme-secondary-dark { color: var(--color-secondary-dark); }
+.text-theme-accent { color: var(--color-accent); }
+.text-theme-success { color: var(--color-success); }
+.text-theme-error { color: var(--color-error); }
+.text-theme-warning { color: var(--color-warning); }
+.text-theme-info { color: var(--color-info); }
+
+/* Border utilities */
+.border-theme-primary { border-color: var(--color-primary); }
+.border-theme-primary-light { border-color: var(--color-primary-light); }
+.border-theme-primary-dark { border-color: var(--color-primary-dark); }
+.border-theme-secondary { border-color: var(--color-secondary); }
+.border-theme-accent { border-color: var(--color-accent); }
+
+/* Ring utilities (for focus states) */
+.ring-theme-primary { --tw-ring-color: var(--color-primary); }
+.ring-theme-primary-light { --tw-ring-color: var(--color-primary-light); }
+.ring-theme-accent { --tw-ring-color: var(--color-accent); }
+
+/* Hover utilities */
+.hover\:bg-theme-primary:hover { background-color: var(--color-primary); }
+.hover\:bg-theme-primary-dark:hover { background-color: var(--color-primary-dark); }
+.hover\:bg-theme-primary-light:hover { background-color: var(--color-primary-light); }
+.hover\:text-theme-primary:hover { color: var(--color-primary); }
+.hover\:text-theme-primary-dark:hover { color: var(--color-primary-dark); }
+.hover\:border-theme-primary:hover { border-color: var(--color-primary); }
+
+/* Focus utilities */
+.focus\:ring-theme-primary:focus { --tw-ring-color: var(--color-primary); }
+.focus\:border-theme-primary:focus { border-color: var(--color-primary); }
+
+/* Gradient utilities */
+.bg-gradient-theme {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+}
+
+.bg-gradient-theme-light {
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
+}
+
+/* Opacity variants */
+.bg-theme-primary\/10 { background-color: color-mix(in srgb, var(--color-primary) 10%, transparent); }
+.bg-theme-primary\/20 { background-color: color-mix(in srgb, var(--color-primary) 20%, transparent); }
+.bg-theme-primary\/30 { background-color: color-mix(in srgb, var(--color-primary) 30%, transparent); }
+.bg-theme-primary\/50 { background-color: color-mix(in srgb, var(--color-primary) 50%, transparent); }
