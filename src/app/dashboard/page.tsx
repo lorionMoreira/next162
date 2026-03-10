@@ -2,23 +2,23 @@ import { getCurrentUser } from '@/lib/auth';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 
 export default async function DashboardPage() {
-  const user = await getCurrentUser(false);
+  const user = await getCurrentUser();
 
   const stats = [
-    { label: 'Pending Tasks', value: '12', color: 'bg-yellow-500' },
-    { label: 'Completed', value: '48', color: 'bg-green-500' },
-    { label: 'In Progress', value: '6', color: 'bg-blue-500' },
-    { label: 'Total', value: '66', color: 'bg-purple-500' },
+    { label: 'Equipamentos Ativos', value: '156', color: 'bg-[#3B5998]' },
+    { label: 'Em Manutenção', value: '12', color: 'bg-yellow-500' },
+    { label: 'Disponíveis', value: '89', color: 'bg-green-500' },
+    { label: 'Total Cadastrado', value: '257', color: 'bg-purple-500' },
   ];
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Welcome back, {user?.username || 'User'}!
+          Bem vindo, {user?.username || 'Usuário'}!
         </h1>
         <p className="text-gray-500 dark:text-gray-400 mt-1">
-          Here&apos;s what&apos;s happening with your account today.
+          Aqui está o resumo das suas atividades hoje.
         </p>
       </div>
 
@@ -41,15 +41,15 @@ export default async function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle>Recent Activity</CardTitle>
+            <CardTitle>Atividades Recentes</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               {[
-                { action: 'Updated profile information', time: '2 hours ago' },
-                { action: 'Submitted new request', time: '5 hours ago' },
-                { action: 'Downloaded report', time: '1 day ago' },
-                { action: 'Changed password', time: '3 days ago' },
+                { action: 'Novo equipamento cadastrado', time: '2 horas atrás' },
+                { action: 'Atualização de inventário', time: '5 horas atrás' },
+                { action: 'Relatório gerado', time: '1 dia atrás' },
+                { action: 'Manutenção concluída', time: '3 dias atrás' },
               ].map((activity, index) => (
                 <div
                   key={index}
@@ -69,15 +69,15 @@ export default async function DashboardPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
+            <CardTitle>Ações Rápidas</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-4">
               {[
-                { label: 'New Request', icon: '📝' },
-                { label: 'View Schedule', icon: '📅' },
-                { label: 'Messages', icon: '💬' },
-                { label: 'Documents', icon: '📄' },
+                { label: 'Novo Equipamento', icon: '📦' },
+                { label: 'Ver Inventário', icon: '📋' },
+                { label: 'Relatórios', icon: '📊' },
+                { label: 'Manutenção', icon: '🔧' },
               ].map((action) => (
                 <button
                   key={action.label}

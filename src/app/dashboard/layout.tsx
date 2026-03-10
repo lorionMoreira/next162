@@ -4,8 +4,8 @@ import Sidebar from '@/components/layout/Sidebar';
 import Footer from '@/components/layout/Footer';
 
 export const metadata = {
-  title: 'Dashboard | Defensoria Pública',
-  description: 'Your personal dashboard',
+  title: 'Painel | SGE-DPE',
+  description: 'Seu painel de controle',
 };
 
 export default async function DashboardLayout({
@@ -13,7 +13,7 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const user = await getCurrentUser(false);
+  const user = await getCurrentUser();
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">

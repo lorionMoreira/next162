@@ -1,26 +1,66 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Primary Colors - Blue Theme */
+  --color-primary: #3B5998;
+  --color-primary-light: #4A6DB5;
+  --color-primary-dark: #2D4373;
+  
+  /* Secondary Colors */
+  --color-secondary: #5C7DC2;
+  --color-secondary-light: #7A9AD8;
+  --color-secondary-dark: #3D5A8A;
+  
+  /* Background Colors */
+  --color-bg-primary: #1E3A5F;
+  --color-bg-secondary: #E8ECF0;
+  --color-bg-card: #FFFFFF;
+  --color-bg-dark: #0D1B2A;
+  
+  /* Text Colors */
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #666666;
+  --color-text-light: #FFFFFF;
+  --color-text-muted: #888888;
+  
+  /* Accent Colors */
+  --color-success: #00C853;
+  --color-error: #FF5252;
+  --color-warning: #FFB300;
+  --color-info: #2196F3;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: 'Inter', var(--font-geist-sans), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-dark);
 }

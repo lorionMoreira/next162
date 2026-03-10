@@ -1,8 +1,8 @@
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 
 export const metadata = {
-  title: 'Settings | Dashboard',
-  description: 'Manage your account settings',
+  title: 'Configurações | SGE-DPE',
+  description: 'Gerencie suas configurações',
 };
 
 export default function SettingsPage() {
@@ -10,23 +10,23 @@ export default function SettingsPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Settings
+          Configurações
         </h1>
         <p className="text-gray-500 dark:text-gray-400 mt-1">
-          Manage your preferences and settings
+          Gerencie suas preferências e configurações
         </p>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Notifications</CardTitle>
+          <CardTitle>Notificações</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             {[
-              { label: 'Email notifications', description: 'Receive email updates about your account' },
-              { label: 'SMS notifications', description: 'Receive text messages for important alerts' },
-              { label: 'Push notifications', description: 'Receive push notifications in browser' },
+              { label: 'Notificações por email', description: 'Receba atualizações por email sobre sua conta' },
+              { label: 'Notificações por SMS', description: 'Receba mensagens de texto para alertas importantes' },
+              { label: 'Notificações push', description: 'Receba notificações push no navegador' },
             ].map((setting, index) => (
               <div
                 key={index}
@@ -42,7 +42,7 @@ export default function SettingsPage() {
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input type="checkbox" className="sr-only peer" defaultChecked={index === 0} />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#3B5998]/30 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#3B5998]"></div>
                 </label>
               </div>
             ))}
@@ -52,13 +52,13 @@ export default function SettingsPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Privacy</CardTitle>
+          <CardTitle>Privacidade</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             {[
-              { label: 'Profile visibility', description: 'Allow others to see your profile' },
-              { label: 'Activity status', description: 'Show when you are online' },
+              { label: 'Visibilidade do perfil', description: 'Permitir que outros vejam seu perfil' },
+              { label: 'Status de atividade', description: 'Mostrar quando você está online' },
             ].map((setting, index) => (
               <div
                 key={index}
@@ -74,7 +74,7 @@ export default function SettingsPage() {
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input type="checkbox" className="sr-only peer" />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#3B5998]/30 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#3B5998]"></div>
                 </label>
               </div>
             ))}

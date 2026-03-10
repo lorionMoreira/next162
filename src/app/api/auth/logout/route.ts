@@ -1,17 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { clearAuthCookie, clearAllAuthCookies } from '@/lib/auth';
+import { NextResponse } from 'next/server';
+import { clearAuthCookie } from '@/lib/auth';
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
-    const { searchParams } = new URL(request.url);
-    const isAdmin = searchParams.get('admin') === 'true';
-    const clearAll = searchParams.get('all') === 'true';
-
-    if (clearAll) {
-      await clearAllAuthCookies();
-    } else {
-      await clearAuthCookie(isAdmin);
-    }
+    await clearAuthCookie();
 
     return NextResponse.json({
       success: true,
