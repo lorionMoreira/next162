@@ -62,9 +62,9 @@ export default function DashboardShell({ children, username }: DashboardShellPro
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen flex flex-col bg-slate-50">
       {/* Header */}
-      <header className="bg-theme-primary text-white shadow-lg sticky top-0 z-40">
+      <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-40">
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Left: Menu button + Logo */}
@@ -72,13 +72,13 @@ export default function DashboardShell({ children, username }: DashboardShellPro
               {/* Mobile menu button */}
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="lg:hidden p-2 rounded-md hover:bg-white/10 transition-colors mr-2"
+                className="lg:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100 transition-colors mr-2"
                 aria-label="Abrir menu"
               >
                 <MenuIcon />
               </button>
               
-              <Link href="/dashboard" className="text-xl font-bold">
+              <Link href="/dashboard" className="text-xl font-bold text-theme-primary">
                 SGE-DPE
               </Link>
             </div>
@@ -87,13 +87,13 @@ export default function DashboardShell({ children, username }: DashboardShellPro
             <nav className="hidden lg:flex items-center space-x-4">
               <Link
                 href="/dashboard"
-                className="px-3 py-2 rounded-md text-sm font-medium hover:bg-white/10 transition-colors"
+                className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-theme-primary transition-colors"
               >
                 Início
               </Link>
               <Link
                 href="/dashboard/profile"
-                className="px-3 py-2 rounded-md text-sm font-medium hover:bg-white/10 transition-colors"
+                className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-theme-primary transition-colors"
               >
                 Perfil
               </Link>
@@ -102,13 +102,13 @@ export default function DashboardShell({ children, username }: DashboardShellPro
             {/* Right: User info + Logout */}
             <div className="flex items-center space-x-4">
               {username && (
-                <span className="text-sm hidden sm:block">
-                  Olá, <strong>{username}</strong>
+                <span className="text-sm hidden sm:block text-gray-600">
+                  Olá, <strong className="text-gray-900">{username}</strong>
                 </span>
               )}
               <button
                 onClick={handleLogout}
-                className="px-3 py-1.5 sm:px-4 sm:py-2 text-sm font-medium border border-white/50 rounded-lg hover:bg-white hover:text-theme-primary transition-colors"
+                className="px-3 py-1.5 sm:px-4 sm:py-2 text-sm font-medium bg-theme-primary text-white rounded-lg hover:bg-theme-primary-dark transition-colors"
               >
                 Sair
               </button>
@@ -121,7 +121,7 @@ export default function DashboardShell({ children, username }: DashboardShellPro
         {/* Mobile sidebar overlay */}
         {sidebarOpen && (
           <div
-            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+            className="fixed inset-0 bg-black/30 z-40 lg:hidden"
             onClick={() => setSidebarOpen(false)}
           />
         )}
@@ -130,8 +130,8 @@ export default function DashboardShell({ children, username }: DashboardShellPro
         <aside
           className={`
             fixed lg:static inset-y-0 left-0 z-50 lg:z-auto
-            w-64 bg-white dark:bg-gray-800 
-            border-r border-gray-200 dark:border-gray-700
+            w-64 bg-white 
+            border-r border-gray-200
             transform transition-transform duration-300 ease-in-out
             lg:transform-none lg:transition-none
             ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
@@ -139,11 +139,11 @@ export default function DashboardShell({ children, username }: DashboardShellPro
           `}
         >
           {/* Mobile close button */}
-          <div className="lg:hidden flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
-            <span className="font-semibold text-gray-900 dark:text-white">Menu</span>
+          <div className="lg:hidden flex items-center justify-between p-4 border-b border-gray-200">
+            <span className="font-semibold text-gray-900">Menu</span>
             <button
               onClick={() => setSidebarOpen(false)}
-              className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              className="p-2 rounded-md text-gray-600 hover:bg-gray-100 transition-colors"
               aria-label="Fechar menu"
             >
               <CloseIcon />
@@ -163,8 +163,8 @@ export default function DashboardShell({ children, username }: DashboardShellPro
                     flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors
                     ${
                       isActive
-                        ? 'bg-theme-primary/10 text-theme-primary'
-                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                        ? 'bg-theme-primary/10 text-theme-primary font-semibold'
+                        : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                     }
                   `}
                 >
@@ -176,10 +176,10 @@ export default function DashboardShell({ children, username }: DashboardShellPro
           </nav>
 
           {/* Mobile user info */}
-          <div className="lg:hidden p-4 border-t border-gray-200 dark:border-gray-700 mt-auto">
+          <div className="lg:hidden p-4 border-t border-gray-200 mt-auto">
             {username && (
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Logado como <strong className="text-gray-900 dark:text-white">{username}</strong>
+              <p className="text-sm text-gray-600">
+                Logado como <strong className="text-gray-900">{username}</strong>
               </p>
             )}
           </div>
@@ -192,9 +192,9 @@ export default function DashboardShell({ children, username }: DashboardShellPro
       </div>
 
       {/* Footer */}
-      <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-4">
+      <footer className="bg-white border-t border-gray-200 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-sm text-gray-500 dark:text-gray-400">
+          <p className="text-center text-sm text-gray-500">
             © {new Date().getFullYear()} Defensoria Pública. Todos os direitos reservados.
           </p>
         </div>

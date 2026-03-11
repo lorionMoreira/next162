@@ -3,7 +3,29 @@ export const API_URL = 'https://agenda.defensoria.ba.def.br/api';
 export const ENDPOINTS = {
   LOGIN: '/login',
   REGISTER: '/cadastro-basico',
+  SOLICITACOES: '/listagem-Solicitacoes',
 } as const;
+
+export interface Solicitacao {
+  id_agendamento: number | null;
+  id: number;
+  requestDate: string;
+  scheduleDate: string | null;
+  subject: string;
+  description: string;
+  answer: string | null;
+  status: number;
+  unit: string | null;
+  address: string | null;
+  process: string;
+  sistema: string;
+  numero: string | null;
+}
+
+export interface SolicitacoesResponse {
+  success: boolean;
+  data: Solicitacao[];
+}
 
 export async function apiRequest<T>(
   endpoint: string,
