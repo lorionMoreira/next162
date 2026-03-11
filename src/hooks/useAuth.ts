@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 
 interface AuthState {
   isAuthenticated: boolean;
-  isAdmin: boolean;
   isLoading: boolean;
   username: string | null;
 }
@@ -16,8 +15,8 @@ interface LoginCredentials {
 }
 
 interface UseAuthReturn extends AuthState {
-  login: (credentials: LoginCredentials, isAdmin?: boolean) => Promise<{ success: boolean; error?: string }>;
-  logout: (isAdmin?: boolean) => Promise<void>;
+  login: (credentials: LoginCredentials) => Promise<{ success: boolean; error?: string }>;
+  logout: () => Promise<void>;
   checkAuth: () => Promise<void>;
 }
 
@@ -25,7 +24,6 @@ export function useAuth(): UseAuthReturn {
   const router = useRouter();
   const [state, setState] = useState<AuthState>({
     isAuthenticated: false,
-    isAdmin: false,
     isLoading: true,
     username: null,
   });
@@ -39,14 +37,12 @@ export function useAuth(): UseAuthReturn {
         const data = await response.json();
         setState({
           isAuthenticated: data.isAuthenticated,
-          isAdmin: data.isAdmin || false,
           username: data.username || null,
           isLoading: false,
         });
       } else {
         setState({
           isAuthenticated: false,
-          isAdmin: false,
           username: null,
           isLoading: false,
         });
@@ -54,7 +50,6 @@ export function useAuth(): UseAuthReturn {
     } catch {
       setState({
         isAuthenticated: false,
-        isAdmin: false,
         username: null,
         isLoading: false,
       });
@@ -66,13 +61,10 @@ export function useAuth(): UseAuthReturn {
   }, [checkAuth]);
 
   const login = async (
-    credentials: LoginCredentials,
-    isAdmin: boolean = false
+    credentials: LoginCredentials
   ): Promise<{ success: boolean; error?: string }> => {
     try {
-      const endpoint = isAdmin ? '/api/auth/admin-login' : '/api/auth/login';
-
-      const response = await fetch(endpoint, {
+      const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(credentials),
@@ -86,7 +78,6 @@ export function useAuth(): UseAuthReturn {
 
       setState({
         isAuthenticated: true,
-        isAdmin,
         username: credentials.username,
         isLoading: false,
       });
@@ -100,20 +91,19 @@ export function useAuth(): UseAuthReturn {
     }
   };
 
-  const logout = async (isAdmin: boolean = false): Promise<void> => {
+  const logout = async (): Promise<void> => {
     try {
-      await fetch(`/api/auth/logout?admin=${isAdmin}`, {
+      await fetch('/api/auth/logout', {
         method: 'POST',
       });
 
       setState({
         isAuthenticated: false,
-        isAdmin: false,
         username: null,
         isLoading: false,
       });
 
-      router.push(isAdmin ? '/admin/login' : '/login');
+      router.push('/login');
       router.refresh();
     } catch (error) {
       console.error('Logout error:', error);

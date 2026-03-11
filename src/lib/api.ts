@@ -3,7 +3,6 @@ export const API_URL = 'https://agenda.defensoria.ba.def.br/api';
 export const ENDPOINTS = {
   LOGIN: '/login',
   REGISTER: '/cadastro-basico',
-  ADMIN_LOGIN: '/admin/login',
 } as const;
 
 export async function apiRequest<T>(
