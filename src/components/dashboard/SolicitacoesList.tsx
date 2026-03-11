@@ -1,16 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
-interface Solicitacao {
-  id: number;
-  requestDate: string;
-  subject: string;
-  description: string;
-  status: number;
-  sistema: string;
-  numero: string | null;
-}
+import { Solicitacao } from '@/types';
 
 const statusLabels: Record<number, { label: string; color: string }> = {
   1: { label: 'Pendente', color: 'bg-yellow-100 text-yellow-800' },

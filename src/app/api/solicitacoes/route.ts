@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getAuthToken } from '@/lib/auth';
-import { apiRequest, ENDPOINTS, SolicitacoesResponse } from '@/lib/api';
+import { apiRequest, ENDPOINTS } from '@/lib/api';
+import { SolicitacoesResponse } from '@/types';
 
 export async function GET() {
   try {
