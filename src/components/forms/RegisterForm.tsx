@@ -2,9 +2,10 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { formatCPF, validateCPF, extractCPFNumbers } from '@/utils';
 
 interface FormErrors {
-  name?: string;
+  cpf?: string;
   email?: string;
   password?: string;
   confirmPassword?: string;
@@ -14,7 +15,7 @@ export default function RegisterForm() {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    name: '',
+    cpf: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -26,7 +27,13 @@ export default function RegisterForm() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    
+    if (name === 'cpf') {
+      setFormData((prev) => ({ ...prev, cpf: formatCPF(value) }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+    
     setErrors((prev) => ({ ...prev, [name]: '' }));
     setServerError('');
   };
@@ -34,8 +41,11 @@ export default function RegisterForm() {
   const validate = (): boolean => {
     const newErrors: FormErrors = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = 'Nome é obrigatório';
+    const cpfNumbers = extractCPFNumbers(formData.cpf);
+    if (!cpfNumbers) {
+      newErrors.cpf = 'CPF é obrigatório';
+    } else if (!validateCPF(formData.cpf)) {
+      newErrors.cpf = 'CPF inválido';
     }
 
     if (!formData.email.trim()) {
@@ -50,7 +60,9 @@ export default function RegisterForm() {
       newErrors.password = 'Senha deve ter pelo menos 6 caracteres';
     }
 
-    if (formData.password !== formData.confirmPassword) {
+    if (!formData.confirmPassword) {
+      newErrors.confirmPassword = 'Confirme sua senha';
+    } else if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = 'As senhas não coincidem';
     }
 
@@ -67,11 +79,13 @@ export default function RegisterForm() {
     setIsLoading(true);
 
     try {
+      const cpfNumbers = extractCPFNumbers(formData.cpf);
+      
       const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: formData.name,
+          username: cpfNumbers,
           email: formData.email,
           password: formData.password,
         }),
@@ -79,7 +93,7 @@ export default function RegisterForm() {
 
       const data = await response.json();
 
-      if (!response.ok) {
+      if (!data.success) {
         throw new Error(data.error || 'Falha no cadastro');
       }
 
@@ -120,31 +134,32 @@ export default function RegisterForm() {
         </div>
       )}
 
-      {/* Name field */}
+      {/* CPF field */}
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-          Nome Completo:
+        <label htmlFor="cpf" className="block text-sm font-medium text-gray-700 mb-1">
+          CPF:
         </label>
         <div className="relative">
           <input
-            id="name"
-            name="name"
+            id="cpf"
+            name="cpf"
             type="text"
-            value={formData.name}
+            inputMode="numeric"
+            value={formData.cpf}
             onChange={handleChange}
-            placeholder="ex: João da Silva"
-            autoComplete="name"
+            placeholder="000.000.000-00"
+            autoComplete="off"
             className={`w-full px-4 py-3 pr-12 border rounded-lg bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-theme-primary focus:border-transparent transition-all ${
-              errors.name ? 'border-red-500' : 'border-gray-300'
+              errors.cpf ? 'border-red-500' : 'border-gray-300'
             }`}
           />
           <div className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
             </svg>
           </div>
         </div>
-        {errors.name && <p className="mt-1 text-sm text-theme-error">{errors.name}</p>}
+        {errors.cpf && <p className="mt-1 text-sm text-theme-error">{errors.cpf}</p>}
       </div>
 
       {/* Email field */}
@@ -204,7 +219,7 @@ export default function RegisterForm() {
       {/* Confirm Password field */}
       <div>
         <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
-          Confirmar Senha:
+          Confirme sua Senha:
         </label>
         <div className="relative">
           <input
